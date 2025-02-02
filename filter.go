@@ -39,7 +39,7 @@ func normalizeText(word string) string {
 // filter takes a b gosseract.BoundingBox. Normalizes the word with search and replace.
 // Counts a score from b.Confidence. Adds 10 to scores if resulting value is a valid word.
 // Returns a normalized word and bool if the score is more than 90
-func filter(b gosseract.BoundingBox) (string, bool) {
+func filter(b gosseract.BoundingBox) (string, float64) {
 	socre := b.Confidence
 
 	word := normalizeText(b.Word)
@@ -54,8 +54,8 @@ func filter(b gosseract.BoundingBox) (string, bool) {
 	}
 
 	if word == "" {
-		return word, false
+		return word, 0
 	}
 
-	return word, socre > 75
+	return word, socre
 }

@@ -12,6 +12,7 @@ import (
 type Config struct {
 	Help      bool     `clap:"--help,-h"`
 	Directory string   `clap:"--directory,-d"`
+	MinScore  float64  `clap:"--min-score,-s"`
 	Images    []string `clap:"trailing"`
 }
 
@@ -21,7 +22,10 @@ func main() {
 		args = os.Args[1:]
 	}
 
-	config := Config{Help: false}
+	config := Config{
+		MinScore: 85,
+		Help:     false,
+	}
 	if _, err := clap.Parse(args, &config); err != nil {
 		fmt.Fprintf(os.Stderr, "Failed parse cli arguments: %+v", err)
 		os.Exit(1)
@@ -33,6 +37,7 @@ Usage: meme-tag [options] [...image_path]
 
 Options:
   -h, --help              Print help
+  -s, --min-score <score> Specify minimum score required in order for a word to be selected
   -d, --directory <path>  Specify directory to tag image
 `)
 		os.Exit(0)
@@ -46,7 +51,7 @@ Options:
 	}
 
 	for _, i := range config.Images {
-		processImage(i, true)
+		processImage(i, config.MinScore, true)
 	}
 
 	if config.Directory == "" {
@@ -63,5 +68,5 @@ Options:
 		os.Exit(0)
 	}
 
-	walkDirectory(config.Directory)
+	walkDirectory(config.Directory, config.MinScore)
 }
