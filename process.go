@@ -31,8 +31,8 @@ func makeUniquePath(dir, base, ext string) string {
 	}
 }
 
-func processImage(filePath string) {
-	if strings.Contains(filePath, ProcessedTag) {
+func processImage(filePath string, force bool) {
+	if strings.Contains(filePath, ProcessedTag) && !force {
 		fmt.Fprintf(os.Stderr, "Skipping already processed file: %s\n", filePath)
 		return
 	}
@@ -88,7 +88,7 @@ func walkDirectory(dir string) {
 			return err
 		}
 		if !info.IsDir() && isImage(path) {
-			processImage(path)
+			processImage(path, false)
 		}
 		return nil
 	})

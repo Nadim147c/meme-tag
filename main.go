@@ -46,7 +46,7 @@ Options:
 	}
 
 	for _, i := range config.Images {
-		processImage(i)
+		processImage(i, true)
 	}
 
 	if config.Directory == "" {
