@@ -1,0 +1,29 @@
+[project]
+name = "meme-tag"
+version = "0.1.0"
+description = ""
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "argparse>=1.4.0",
+    "easyocr>=1.7.2",
+    "torch>=2.6.0",
+    "torchvision>=0.21.0",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.9.4",
+]
+
+[tool.pyright]
+venvPath = "."
+venv = ".venv"
+
+[tool.uv.sources]
+torch = { index = "pytorch_cpu" }
+torchvision = { index = "pytorch_cpu" }
+
+[[tool.uv.index]]
+name = "pytorch_cpu"
+url = "https://download.pytorch.org/whl/cpu"

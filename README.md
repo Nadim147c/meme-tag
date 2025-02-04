@@ -18,54 +18,41 @@ Because naming files manually is **boring**. Let the AI do the work, and **embra
 
 ## 🛠 Dependencies
 
-This tool relies on Tesseract-OCR. You need to install both the library and headers:
-
-#### Linux (ArchLinux) [I use arch BTW]
-
-```sh
-pacman -S tesseract tesseract-data-ocr tesseract-data-eng
-```
-
-#### Linux (Debian/Ubuntu)
-
-```sh
-sudo apt install tesseract-ocr libtesseract-dev
-```
-
-#### MacOS (Homebrew)
-
-```sh
-brew install tesseract
-```
-
-#### Windows
-
-Download and install Tesseract from: https://github.com/tesseract-ocr/tesseract
-
-Ensure tesseract is in your system's PATH.
+- [Python3](https://www.python.org/)
+- [uv](https://docs.astral.sh/uv/) (Optional if you know how to manage virtual env)
 
 ## 🚀 Installation
 
-```
-go install github.com/Nadim147c/meme-tag@latest
-```
-
-Or, you know, build it yourself like a responsible adult:
+**Clone the git repository**
 
 ```
-git clone https://github.com/Nadim147c/meme-tag.git
-cd meme-tag
-go install
+git clone --branch easyocr --single-branch https://github.com/Nadim147c/meme-tag.git
+```
+
+**Install dependencies**
+
+> Note: By default it uses the CPU version of PyTorch. Which downloads fast but runs on CPU (slow).
+> If you have a nvidia GPU, you should install the GPU version of PyTorch by removing the following
+> lines from `./pyproject.toml` and then run `uv install`
+
+```
+[tool.uv.sources]
+torch = { index = "pytorch_cpu" }
+torchvision = { index = "pytorch_cpu" }
+```
+
+```
+uv install
 ```
 
 ## 📸 Usage
 
 ```sh
 # Rename a single image
-meme-tag my_meme.png
+uv run main.py /path/to/image
 
-# Process an entire directory
-meme-tag -d ~/Pictures
+# Process all jpg files a directory
+uv run main.py /path/to/*.jpg
 ```
 
 Example:
