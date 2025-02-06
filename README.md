@@ -27,6 +27,7 @@ Because naming files manually is **boring**. Let the AI do the work, and **embra
 
 ```
 git clone --branch easyocr --single-branch https://github.com/Nadim147c/meme-tag.git
+cd meme-tag
 ```
 
 **Install dependencies**
@@ -45,14 +46,24 @@ torchvision = { index = "pytorch_cpu" }
 uv install
 ```
 
+If you want to installed `meme-tag` command to your system PATH. Then,
+
+```
+uv tool install .
+```
+
 ## 📸 Usage
 
 ```sh
 # Rename a single image
 uv run main.py /path/to/image
+# If you have installed it to your system PATH,
+meme-tag /path/to/image
 
 # Process all jpg files a directory
 uv run main.py /path/to/*.jpg
+# If you have installed it to your system PATH,
+meme-tag /path/to/*.jpg
 ```
 
 Example:

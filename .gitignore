@@ -1,3 +1,5 @@
 meme-tag
 .venv
 .ruff_cache
+build
+meme_tag.egg-info

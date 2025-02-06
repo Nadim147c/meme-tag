@@ -11,6 +11,9 @@ dependencies = [
     "torchvision>=0.21.0",
 ]
 
+[project.scripts]
+meme-tag = "meme_tag:cmd"
+
 [dependency-groups]
 dev = [
     "ruff>=0.9.4",

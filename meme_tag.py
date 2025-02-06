@@ -42,7 +42,7 @@ def rename(path: str, text: str):
     return new_path
 
 
-def main():
+def cmd():
     parser = argparse.ArgumentParser(
         prog="meme-tag",
         description="Set file name to the title of a meme using OCR",
@@ -65,4 +65,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    cmd()
